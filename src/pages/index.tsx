@@ -11,9 +11,9 @@ export default function Page() {
   return (
     <AuthorizedContent>
       <ul>
-        {displayedUsers.map(({ node }) => {
+        {displayedUsers.map(({ node }, index) => {
           return (
-            <li key={node.id}>{node.nicename}</li>
+            <li key={node?.id ?? index}>{node.nicename}</li>
           )
         })}
       </ul>
