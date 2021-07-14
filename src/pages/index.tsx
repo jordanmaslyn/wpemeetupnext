@@ -1,12 +1,11 @@
 import React from 'react';
 import { AuthorizedContent } from 'components/AuthorizedContent';
-import { client } from 'client';
-import { RootQueryToUserConnectionEdge } from '@faustjs/core';
+import { client, RootQueryToUserConnectionEdge } from 'client';
 
 export default function Page() {
   const { users } = client.useQuery();
-  const isNotAdmin = ({ node }: RootQueryToUserConnectionEdge) => !node.roles().nodes.map(n => n.name).includes('administrator');
-  const displayedUsers = users().edges.filter(isNotAdmin);
+  const isNotExcluded = ({ node }: RootQueryToUserConnectionEdge) => !node.meetupInfo.exclude;
+  const displayedUsers = users().edges.filter(isNotExcluded);
 
   return (
     <AuthorizedContent>

@@ -5804,7 +5804,7 @@ export const generatedSchema = {
   User_Meetupinfo: {
     __typename: { __type: "String!" },
     email: { __type: "String" },
-    exclude: { __type: "[String]" },
+    exclude: { __type: "Boolean" },
     fieldGroupName: { __type: "String" },
     location: { __type: "ACF_GoogleMap" },
     phoneNumber: { __type: "String" },
@@ -11370,7 +11370,7 @@ export interface MediaSize {
 export interface User_Meetupinfo extends Omit<AcfFieldGroup, "__typename"> {
   __typename: "User_Meetupinfo" | undefined;
   email?: Maybe<ScalarsEnums["String"]>;
-  exclude?: Maybe<Array<Maybe<ScalarsEnums["String"]>>>;
+  exclude?: Maybe<ScalarsEnums["Boolean"]>;
   /**
    * The name of the ACF Field Group
    */
