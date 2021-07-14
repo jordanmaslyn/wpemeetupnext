@@ -10,10 +10,13 @@ export default function Page() {
 
   return (
     <AuthorizedContent>
+      <a href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}>Edit My Info</a>
       <ul>
         {displayedUsers.map(({ node }, index) => {
           return (
-            <li key={node?.id ?? index}>{node.firstName} {node.lastName} - {node.meetupInfo.location.city}, {node.meetupInfo.location.state}</li>
+            <li key={node?.id ?? index}>
+              {node.firstName} {node.lastName} - {node.meetupInfo.location.city}, {node.meetupInfo.location.state}
+            </li>
           )
         })}
       </ul>
