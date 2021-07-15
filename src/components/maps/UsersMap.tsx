@@ -18,7 +18,7 @@ export function UsersMap({ users }: PropsWithChildren<UsersMapProps>) {
         const bounds = new google.maps.LatLngBounds();
         const infowindow = new google.maps.InfoWindow();
 
-        populatedUsers.forEach(({ node: { meetupInfo: { location } } }) => {
+        populatedUsers.forEach(({ node: { firstName, lastName, meetupInfo: { location } } }) => {
             const latLng = new google.maps.LatLng(location.latitude, location.longitude);
             const marker = new google.maps.Marker({
                 position: latLng,
@@ -29,7 +29,7 @@ export function UsersMap({ users }: PropsWithChildren<UsersMapProps>) {
 
             google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
-                    infowindow.setContent(`${location.city}, ${location.state}`);
+                    infowindow.setContent(`${firstName} ${lastName} (${location.city}, ${location.state})`);
                     infowindow.open(map, marker);
                 }
             })(marker));
