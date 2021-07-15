@@ -55,6 +55,10 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
         const checked = e.target.checked;
         setFiltering(checked);
 
+        if (!checked) {
+            setLocation(null);
+        }
+
         if (!checked || !location) {
             handleOnChange(allUsers);
             return;
