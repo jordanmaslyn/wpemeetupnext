@@ -4,6 +4,7 @@ import { MutableRefObject, useEffect, useState } from "react";
 const loader = new Loader({
     apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     version: "weekly",
+    libraries: ['geometry', 'places']
   });
 
 export function useGoogleMap(ref: MutableRefObject<HTMLElement>) {
