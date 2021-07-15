@@ -57,7 +57,7 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
             {
                 filtering && (
                     <div>
-                        Folks within <select value={distance} onChange={e => setDistance(Number(e.target.value))}>{distances.map(distance => (<option value={distance} key={distance}>{distance}</option>))}</select> miles of <input ref={origin} type="text" placeholder="Location" />
+                        Folks within <select value={distance} onChange={e => setDistance(Number(e.target.value))}>{distances.map(distance => (<option value={distance} key={distance}>{distance}</option>))}</select> miles of <input ref={originRef} type="text" placeholder="Location" />
                     </div>
                 )
             }
