@@ -5,3 +5,17 @@
 html {
   font-family: 'Open Sans', sans-serif;
 }
+
+.user-list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, maxcontent);
+  grid-template-rows: auto;
+  gap: 1em;
+  }
+  
+  .user-name { grid-area: 1 / 1 / 2 / 2; }
+  .user-location { grid-area: 1 / 2 / 2 / 3; }
+  .user-phone { grid-area: 1 / 3 / 2 / 4; }
+  .user-email { grid-area: 1 / 4 / 2 / 5; }
+
+  /* .user-slack { grid-area: 1 / 5 / 2 / 6; } */

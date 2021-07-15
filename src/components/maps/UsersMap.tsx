@@ -1,7 +1,7 @@
 import { useGoogleMap } from 'hooks/useGoogleMap';
 import { useEffect, useRef, useState } from 'react';
 import { client, RootQueryToUserConnectionEdge } from 'client';
-import { UserListEntry } from 'components/UserListEntry';
+import { UserList } from 'components/UserList';
 import styles from './styles.module.css';
 import { useUserMapMarkers } from 'hooks/useUserMapMarkers';
 import { UserFilter } from 'components/UserFilter';
@@ -29,15 +29,8 @@ export function UsersMap() {
             <p>Map goes here...</p>
             <div style={{ width: 600, height: 600 }} ref={mapRef} />
             <UserFilter onChange={users => setFilteredUsers(users)} allUsers={populatedUsers} google={google} map={map} />
-            <ul>
-                {filteredUsers.map((node, index) => {
-                    return (
-                        <li key={node?.id ?? index}>
-                            <UserListEntry user={node} />
-                        </li>
-                    )
-                })}
-            </ul>
+            
+            <UserList users={filteredUsers} />
         </>
         // <div className={styles['google-map']}>
         //     <GoogleMapReact
