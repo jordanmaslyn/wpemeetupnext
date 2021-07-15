@@ -1,7 +1,7 @@
 import React from 'react';
-import { AuthorizedContent } from 'components/AuthorizedContent';
 import { client, RootQueryToUserConnectionEdge } from 'client';
 import { UsersMap } from 'components/maps/UsersMap';
+import Layout from "components/Layout"
 import { UserListEntry } from 'components/UserListEntry';
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
   const displayedUsers = users().edges.filter(isNotExcluded).filter(hasLocation);
 
   return (
-    <AuthorizedContent>
+    <Layout>
       <UsersMap users={displayedUsers} />
       <ul>
         {displayedUsers.map(({ node }, index) => {
@@ -22,7 +22,6 @@ export default function Page() {
           )
         })}
       </ul>
-      <a href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}>Edit My Info</a>
-    </AuthorizedContent>
+    </Layout>
   );
 }
