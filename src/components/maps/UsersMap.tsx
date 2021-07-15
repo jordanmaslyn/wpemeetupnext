@@ -30,7 +30,7 @@ export function UsersMap() {
             <div style={{ width: 600, height: 600 }} ref={mapRef} />
             <UserFilter onChange={users => setFilteredUsers(users)} allUsers={populatedUsers} google={google} map={map} />
             <ul>
-                {displayedUsers.map(({ node }, index) => {
+                {filteredUsers.map((node, index) => {
                     return (
                         <li key={node?.id ?? index}>
                             <UserListEntry user={node} />

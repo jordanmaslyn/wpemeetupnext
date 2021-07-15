@@ -16,24 +16,39 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
     const [location, setLocation] = useState(null);
     const originRef = useRef(null);
 
+    const updateLocation = (autocomplete) => () => {
+        const place = autocomplete.getPlace();
+
+        if (place.geometry?.location == null) return;
+
+        const newLocation = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+        setLocation(newLocation);
+        handleOnChange(filterUsers(newLocation));
+    };
+
     const options = {
         componentRestrictions: { country: "us" },
         fields: ["address_components", "geometry", "icon", "name"],
         strictBounds: false,
-        types: ["establishment"],
-      };
-    
+        types: ["(cities)"],
+    };
+
     useEffect(() => {
-        if (originRef.current == null) return;
+        if (originRef.current == null || !filtering) return;
 
         const autocomplete = new google.maps.places.Autocomplete(originRef.current, options);
         autocomplete.bindTo("bounds", map);
-    }, [originRef.current]);
+        autocomplete.addListener("place_changed", updateLocation(autocomplete));
+    }, [originRef.current, filtering]);
 
     if (google == null || map == null) return null;
 
-    const filterUsers = (): User[] => {
-        return allUsers;
+    const filterUsers = (filteredLocation = location): User[] => {
+        return allUsers.filter(user => {
+            const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(filteredLocation), new google.maps.LatLng({ lat: user.meetupInfo.location.latitude, lng: user.meetupInfo.location.longitude }))
+            const distanceInMiles = distanceInMeters * 0.000621371;
+            return distanceInMiles <= distance;
+        });
     }
 
     const handleFilterToggle = e => {
