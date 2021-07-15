@@ -2,6 +2,7 @@ import React from 'react';
 import { client, RootQueryToUserConnectionEdge } from 'client';
 import { UsersMap } from 'components/maps/UsersMap';
 import Layout from "components/Layout"
+import { UserListEntry } from 'components/UserListEntry';
 
 export default function Page() {
   const { users } = client.useQuery();
@@ -10,17 +11,17 @@ export default function Page() {
   const displayedUsers = users().edges.filter(isNotExcluded).filter(hasLocation);
 
   return (
-      <Layout>
-        <UsersMap users={displayedUsers} />
-        <ul>
-          {displayedUsers.map(({ node }, index) => {
-            return (
-              <li key={node?.id ?? index}>
-                {node.firstName} {node.lastName} - {node.meetupInfo.location.city}, {node.meetupInfo.location.state}
-              </li>
-            )
-          })}
-        </ul>
-      </Layout>
+    <Layout>
+      <UsersMap users={displayedUsers} />
+      <ul>
+        {displayedUsers.map(({ node }, index) => {
+          return (
+            <li key={node?.id ?? index}>
+              <UserListEntry user={node} />
+            </li>
+          )
+        })}
+      </ul>
+    </Layout>
   );
 }
