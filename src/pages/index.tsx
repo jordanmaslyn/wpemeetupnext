@@ -1,14 +1,14 @@
 import React from 'react';
-import { AuthorizedContent } from 'components/AuthorizedContent';
 import { UsersMap } from 'components/maps/UsersMap';
+import Layout from "components/Layout"
 
 export default function Page() {
   
 
   return (
-    <AuthorizedContent>
+    <Layout>
       <UsersMap />
       <a href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}>Edit My Info</a>
-    </AuthorizedContent>
+    </Layout>
   );
 }
