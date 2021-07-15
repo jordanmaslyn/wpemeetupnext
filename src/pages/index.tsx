@@ -1,7 +1,7 @@
 import React from 'react';
-import { AuthorizedContent } from 'components/AuthorizedContent';
 import { client, RootQueryToUserConnectionEdge } from 'client';
 import { UsersMap } from 'components/maps/UsersMap';
+import Layout from "components/Layout"
 
 export default function Page() {
   const { users } = client.useQuery();
@@ -10,18 +10,17 @@ export default function Page() {
   const displayedUsers = users().edges.filter(isNotExcluded).filter(hasLocation);
 
   return (
-    <AuthorizedContent>
-      <UsersMap users={displayedUsers} />
-      <ul>
-        {displayedUsers.map(({ node }, index) => {
-          return (
-            <li key={node?.id ?? index}>
-              {node.firstName} {node.lastName} - {node.meetupInfo.location.city}, {node.meetupInfo.location.state}
-            </li>
-          )
-        })}
-      </ul>
-      <a href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}>Edit My Info</a>
-    </AuthorizedContent>
+      <Layout>
+        <UsersMap users={displayedUsers} />
+        <ul>
+          {displayedUsers.map(({ node }, index) => {
+            return (
+              <li key={node?.id ?? index}>
+                {node.firstName} {node.lastName} - {node.meetupInfo.location.city}, {node.meetupInfo.location.state}
+              </li>
+            )
+          })}
+        </ul>
+      </Layout>
   );
 }
