@@ -1,4 +1,10 @@
+import {client} from "client"
+
 export default function Header() {
+  const {useQuery} = client
+
+  const name = useQuery().viewer.name
+
   return (
     <>
       <div className="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true" />
@@ -10,8 +16,11 @@ export default function Header() {
             <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
           </a>
         </div>
-
+          
         <div className="flex items-center md:ml-12">
+          <p>
+            Logged in as <strong>{name}</strong>
+          </p>
           <a
             href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}
             className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-brand-primary-dark-blue hover:bg-brand-primary-orange"

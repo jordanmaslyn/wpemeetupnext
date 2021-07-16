@@ -15,7 +15,7 @@ export function UserListEntry({ user }: PropsWithChildren<UserListEntryProps>) {
         {user?.firstName} {user?.lastName}
       </span>
       <span className="user-location">
-        {user?.meetupInfo?.location?.city}, {user?.meetupInfo?.location?.state}
+        {user?.meetupInfo?.location?.city}, {user?.meetupInfo?.location?.state}, {user?. meetupInfo?.location?.countryShort}
       </span>
       <span className="user-email">
         {emailAddress ? (
