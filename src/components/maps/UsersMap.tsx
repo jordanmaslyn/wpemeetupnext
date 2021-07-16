@@ -21,7 +21,7 @@ export function UsersMap() {
     const isNotExcluded = ({ node }: RootQueryToUserConnectionEdge) => !node.meetupInfo.exclude;
     const hasLocation = ({ node }: RootQueryToUserConnectionEdge) =>
         node.meetupInfo?.location != null;
-    const displayedUsers = users().edges.filter(isNotExcluded).filter(hasLocation);
+    const displayedUsers = users({first: 100}).edges.filter(isNotExcluded).filter(hasLocation);
     const populatedUsers = displayedUsers
         .filter(
             ({
