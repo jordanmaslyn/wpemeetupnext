@@ -46,7 +46,6 @@ export function UserFilter({
     if (originRef.current == null || !filtering) return;
 
     const options = {
-        componentRestrictions: { country: "us" },
         fields: ["address_components", "geometry", "icon", "name"],
         strictBounds: false,
         types: ["(cities)"],
