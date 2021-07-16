@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { client } from "client";
 
 export default function Header() {
@@ -10,11 +12,15 @@ export default function Header() {
       <div className="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true" />
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:space-x-10">
         <div>
-          <a href="/" className="flex">
-            <span className="sr-only">WP Engine Meetup</span>
-            <img className="h-8 w-auto sm:h-10" src="/images/wpe-logo.svg" alt="" />
-            <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
-          </a>
+          <Link href="/">
+            <a className="flex">
+              <span className="sr-only">WP Engine Meetup</span>
+              <div className="h-8 w-auto sm:h-10">
+                <Image src={require('/public/images/wpe-logo.svg')} alt="" />
+              </div>
+              <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
+            </a>
+          </Link>
         </div>
 
         <div className="flex items-center md:ml-12">

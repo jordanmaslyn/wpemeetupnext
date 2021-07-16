@@ -32,6 +32,7 @@ export function UsersMap() {
 
   useEffect(() => {
     setFilteredUsers(populatedUsers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [populatedUsers.length]);
 
   useUserMapMarkers({ map, google, users: filteredUsers, allUsers: populatedUsers });
