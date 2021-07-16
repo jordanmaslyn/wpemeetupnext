@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getLocationString } from "../utilities/strings"
+import { getLocationString } from "../utilities/strings";
 
 export function useUserMapMarkers({ map, google, users, allUsers }) {
   const [markers, setMarkers] = useState([]);

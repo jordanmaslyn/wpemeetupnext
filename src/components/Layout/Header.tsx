@@ -1,9 +1,9 @@
-import {client} from "client"
+import { client } from "client";
 
 export default function Header() {
-  const {useQuery} = client
+  const { useQuery } = client;
 
-  const name = useQuery().viewer.name
+  const name = useQuery().viewer.name;
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function Header() {
             <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
           </a>
         </div>
-          
+
         <div className="flex items-center md:ml-12">
           <p>
             Logged in as <strong>{name}</strong>

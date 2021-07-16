@@ -116,9 +116,7 @@ export function UserFilter({
             className="mr-2"
           />
           <span>
-            {filtering ? (
-              <span>Currently filtering by proximity:</span>
-            ) : (
+            {filtering ? null : (
               <span>
                 <strong>Not</strong> currently filtering by proximity:
               </span>
@@ -126,7 +124,7 @@ export function UserFilter({
           </span>
         </label>
         {filtering && (
-          <div>
+          <span>
             Folks within{" "}
             <select value={distance} onChange={handleDistanceChange}>
               {distances.map((distance) => (
@@ -136,7 +134,7 @@ export function UserFilter({
               ))}
             </select>{" "}
             miles of <input ref={originRef} type="text" placeholder="Location" />
-          </div>
+          </span>
         )}
       </div>
       <div className="flex-none">
