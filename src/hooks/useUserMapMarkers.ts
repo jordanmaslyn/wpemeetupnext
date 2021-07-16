@@ -46,5 +46,5 @@ export function useUserMapMarkers({ map, google, users, allUsers }) {
 
     const markerCluster = new MarkerClusterer(map, markers,
         {imagePath: `/images/m`});
-  }, [map, google, users.length, MarkerClusterer]);
+  }, [map, google, users.length, allUsers.length, MarkerClusterer]);
 }
