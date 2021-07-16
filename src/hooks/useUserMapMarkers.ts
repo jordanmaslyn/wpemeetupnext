@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getLocationString } from "../utilities/strings"
 
 export function useUserMapMarkers({ map, google, users, allUsers }) {
   const [markers, setMarkers] = useState([]);
@@ -32,7 +33,7 @@ export function useUserMapMarkers({ map, google, users, allUsers }) {
         "click",
         (function (marker) {
           return function () {
-            infowindow.setContent(`${firstName} ${lastName} (${location.city}, ${location.state})`);
+            infowindow.setContent(`${firstName} ${lastName} (${getLocationString(location)})`);
             infowindow.open(map, marker);
           };
         })(marker)
