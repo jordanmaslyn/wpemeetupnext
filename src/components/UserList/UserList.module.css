@@ -1,9 +1,10 @@
-.list {}
+.list {
+}
 
 .list-item {
-    @apply py-2
+  @apply py-2;
 }
 
 .list-item:nth-child(even) {
-    background-color: #ededed;
+  background-color: #ededed;
 }

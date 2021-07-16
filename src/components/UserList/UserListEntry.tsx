@@ -1,6 +1,6 @@
 import { User } from "client";
 import { PropsWithChildren } from "react";
-import { MailIcon, PhoneIcon } from "@heroicons/react/outline"
+import { MailIcon, PhoneIcon } from "@heroicons/react/outline";
 interface UserListEntryProps {
   user: User;
 }
@@ -10,19 +10,25 @@ export function UserListEntry({ user }: PropsWithChildren<UserListEntryProps>) {
   const emailAddress = user?.meetupInfo?.email;
 
   return (
-    <div className="user-list-grid max-w-5xl mx-auto" >
-      <span className="user-name">{user?.firstName} {user?.lastName}</span>
-      <span className="user-location">{user?.meetupInfo?.location?.city}, {user?.meetupInfo?.location?.state}</span>
+    <div className="user-list-grid max-w-5xl mx-auto">
+      <span className="user-name">
+        {user?.firstName} {user?.lastName}
+      </span>
+      <span className="user-location">
+        {user?.meetupInfo?.location?.city}, {user?.meetupInfo?.location?.state}
+      </span>
       <span className="user-email">
-        {
-          emailAddress ? (
-            <a href={`mailto:${emailAddress}`} title="Email">
-              <span className="sr-only">Email</span>
-              <MailIcon className="w-4 inline" />
-              {emailAddress}
-            </a>
-          ) : <p><em>Not shared</em></p>
-        }
+        {emailAddress ? (
+          <a href={`mailto:${emailAddress}`} title="Email">
+            <span className="sr-only">Email</span>
+            <MailIcon className="w-4 inline" />
+            {emailAddress}
+          </a>
+        ) : (
+          <p>
+            <em>Not shared</em>
+          </p>
+        )}
       </span>
       <span className="user-phone">
         {phoneNumber ? (
@@ -31,8 +37,11 @@ export function UserListEntry({ user }: PropsWithChildren<UserListEntryProps>) {
             <PhoneIcon className="w-4 inline" />
             {phoneNumber}
           </a>
-        ) : <p><em>Not shared</em></p>
-        }
+        ) : (
+          <p>
+            <em>Not shared</em>
+          </p>
+        )}
       </span>
     </div>
   );

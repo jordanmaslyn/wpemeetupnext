@@ -6,11 +6,7 @@ export default function Header() {
         <div>
           <a href="/" className="flex">
             <span className="sr-only">WP Engine Meetup</span>
-            <img
-              className="h-8 w-auto sm:h-10"
-              src="/images/wpe-logo.svg"
-              alt=""
-            />
+            <img className="h-8 w-auto sm:h-10" src="/images/wpe-logo.svg" alt="" />
             <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
           </a>
         </div>
@@ -26,5 +22,5 @@ export default function Header() {
         </div>
       </div>
     </>
-  )
+  );
 }

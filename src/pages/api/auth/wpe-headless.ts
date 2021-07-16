@@ -1,3 +1,3 @@
-import { authorizeHandler } from '@faustjs/core';
+import { authorizeHandler } from "@faustjs/core";
 
 export default authorizeHandler;

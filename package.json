@@ -8,6 +8,7 @@
     "start": "next start",
     "clean": "rimraf .next node_modules",
     "lint": "next lint",
+    "format": "prettier src --write",
     "generate": "gqless generate",
     "wpe-build": "next build",
     "copy-theme": "cp -r nude-child ~/Local\\ Sites/wpemeetup/app/public/wp-content/themes/"
