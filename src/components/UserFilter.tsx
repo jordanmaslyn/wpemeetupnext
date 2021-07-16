@@ -100,7 +100,7 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
                 }
             </div>
             <div className="flex-none">
-                <button className="bg-brand-primary-teal py-1 px-2 rounded-sm text-white disabled:opacity-50" onClick={handleEmailGroup} disabled={filteredUsers.filter(user => user.meetupInfo.email != null).length === 0}>Email Group</button>
+                <button className="bg-brand-primary-teal py-1 px-2 rounded-sm text-white disabled:opacity-50 disabled:cursor-not-allowed" onClick={handleEmailGroup} disabled={!filtering || !location || filteredUsers.filter(user => user.meetupInfo.email != null).length === 0}>Email Group</button>
             </div>
         </div>
     );
