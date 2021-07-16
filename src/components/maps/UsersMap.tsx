@@ -2,7 +2,6 @@ import { useGoogleMap } from "hooks/useGoogleMap";
 import { useEffect, useRef, useState } from "react";
 import { client, RootQueryToUserConnectionEdge } from "client";
 import { UserList } from "components/UserList";
-import styles from "./styles.module.css";
 import { useUserMapMarkers } from "hooks/useUserMapMarkers";
 import { UserFilter } from "components/UserFilter";
 

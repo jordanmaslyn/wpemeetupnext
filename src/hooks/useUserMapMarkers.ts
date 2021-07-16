@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLocationString } from "../utilities/strings";
+import MarkerClusterer from '@googlemaps/markerclustererplus';
 
 export function useUserMapMarkers({ map, google, users, allUsers }) {
   const [markers, setMarkers] = useState([]);
@@ -22,7 +23,7 @@ export function useUserMapMarkers({ map, google, users, allUsers }) {
       const latLng = new google.maps.LatLng(location.latitude, location.longitude);
       const marker = new google.maps.Marker({
         position: latLng,
-        map: map,
+        // map: map,
       });
       setMarkers((existingMarkers) => [...existingMarkers, marker]);
 
@@ -42,5 +43,8 @@ export function useUserMapMarkers({ map, google, users, allUsers }) {
 
     map.fitBounds(bounds);
     map.panToBounds(bounds);
-  }, [map, google, users.length]);
+
+    const markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: `/images/m`});
+  }, [map, google, users.length, MarkerClusterer]);
 }
