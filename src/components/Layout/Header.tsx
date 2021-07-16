@@ -16,6 +16,7 @@ export default function Header() {
             href={`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/profile.php`}
             className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-brand-primary-dark-blue hover:bg-brand-primary-orange"
             target="_blank"
+            rel="noreferrer"
           >
             Edit Profile
           </a>
