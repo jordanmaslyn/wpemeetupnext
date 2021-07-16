@@ -10,7 +10,7 @@ export function UsersMap() {
     const mapRef = useRef(null as HTMLDivElement);
     const { map, google } = useGoogleMap(mapRef);
 
-    const { users } = client.useQuery();
+    const { users, $state: { isLoading } } = client.useQuery();
     const isNotExcluded = ({ node }: RootQueryToUserConnectionEdge) => !node.meetupInfo.exclude;
     const hasLocation = ({ node }: RootQueryToUserConnectionEdge) => node.meetupInfo?.location != null;
     const displayedUsers = users().edges.filter(isNotExcluded).filter(hasLocation);
@@ -22,14 +22,15 @@ export function UsersMap() {
         setFilteredUsers(populatedUsers);
     }, [populatedUsers.length]);
 
-    useUserMapMarkers({map, google, users: filteredUsers});
+    useUserMapMarkers({ map, google, users: filteredUsers, allUsers: populatedUsers });
 
     return (
         <>
             <div style={{ width: '100%', height: 600, maxHeight: '50vh' }} ref={mapRef} />
-            <UserFilter onChange={users => setFilteredUsers(users)} allUsers={populatedUsers} google={google} map={map} />
-            
-            <UserList users={filteredUsers} />
+            <div className="container mx-auto">
+                <UserFilter onChange={users => setFilteredUsers(users)} allUsers={populatedUsers} google={google} map={map} />
+                <UserList users={filteredUsers} loading={isLoading} />
+            </div>
         </>
     )
 }

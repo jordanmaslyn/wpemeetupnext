@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 
-export function useUserMapMarkers({map, google, users}) {
+export function useUserMapMarkers({map, google, users, allUsers}) {
     const [markers, setMarkers] = useState([]);
 
     useEffect(() => {
-        if (map == null || google == null || users.length === 0) return;
+        if (map == null || google == null) return;
+
+        let usersToShow = users;
+        if (usersToShow.length === 0) {
+            usersToShow = allUsers;
+        }
 
         const bounds = new google.maps.LatLngBounds();
         const infowindow = new google.maps.InfoWindow();
@@ -12,7 +17,7 @@ export function useUserMapMarkers({map, google, users}) {
         markers.forEach(m => m.setMap(null)); //clear out previous markers
         setMarkers([]); // reset marker array
 
-        users.forEach(({ firstName, lastName, meetupInfo: { location } }) => {
+        usersToShow.forEach(({ firstName, lastName, meetupInfo: { location } }) => {
             const latLng = new google.maps.LatLng(location.latitude, location.longitude);
             const marker = new google.maps.Marker({
                 position: latLng,

@@ -23,7 +23,7 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
 
         const newLocation = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
         setLocation(newLocation);
-        handleOnChange(filterUsers(newLocation));
+        handleOnChange(filterUsers({filteredLocation: newLocation}));
     };
 
     const options = {
@@ -43,11 +43,11 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
 
     if (google == null || map == null) return null;
 
-    const filterUsers = (filteredLocation = location): User[] => {
+    const filterUsers = ({filteredLocation = location, filteredDistance = distance} = {}): User[] => {
         return allUsers.filter(user => {
             const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(filteredLocation), new google.maps.LatLng({ lat: user.meetupInfo.location.latitude, lng: user.meetupInfo.location.longitude }))
             const distanceInMiles = distanceInMeters * 0.000621371;
-            return distanceInMiles <= distance;
+            return distanceInMiles <= filteredDistance;
         });
     }
 
@@ -67,16 +67,25 @@ export function UserFilter({ allUsers, google, map, onChange: handleOnChange }: 
         handleOnChange(filterUsers());
     }
 
+    const handleDistanceChange = e => {
+        const newDistance = Number(e.target.value);
+        setDistance(newDistance);
+
+        if (!!location) {
+            handleOnChange(filterUsers({filteredDistance: newDistance}));
+        }
+    }
+
     return (
-        <div>
+        <div className="max-w-5xl mx-auto mb-4 mt-6">
             <label htmlFor="enableDistanceFilter">
-                <input type="checkbox" name="enableDistanceFilter" id="enableDistanceFilter" checked={filtering} onChange={handleFilterToggle} />
+                <input type="checkbox" name="enableDistanceFilter" id="enableDistanceFilter" checked={filtering} onChange={handleFilterToggle} className="mr-2" />
                 <span>{filtering ? <span>Currently filtering by proximity:</span> : <span><strong>Not</strong> currently filtering by proximity:</span>}</span>
             </label>
             {
                 filtering && (
                     <div>
-                        Folks within <select value={distance} onChange={e => setDistance(Number(e.target.value))}>{distances.map(distance => (<option value={distance} key={distance}>{distance}</option>))}</select> miles of <input ref={originRef} type="text" placeholder="Location" />
+                        Folks within <select value={distance} onChange={handleDistanceChange}>{distances.map(distance => (<option value={distance} key={distance}>{distance}</option>))}</select> miles of <input ref={originRef} type="text" placeholder="Location" />
                     </div>
                 )
             }
