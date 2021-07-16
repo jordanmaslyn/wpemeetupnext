@@ -26,29 +26,10 @@ export function UsersMap() {
 
     return (
         <>
-            <p>Map goes here...</p>
-            <div style={{ width: 600, height: 600 }} ref={mapRef} />
+            <div style={{ width: '100%', height: 600, maxHeight: '50vh' }} ref={mapRef} />
             <UserFilter onChange={users => setFilteredUsers(users)} allUsers={populatedUsers} google={google} map={map} />
             
             <UserList users={filteredUsers} />
         </>
-        // <div className={styles['google-map']}>
-        //     <GoogleMapReact
-        //         bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
-        //         defaultCenter={usCenter}
-        //         defaultZoom={4}
-        //     >
-        //         {users.map(({ node: { id = '', meetupInfo: { location } } }) => {
-        //             return (
-        //                 <UserPin
-        //                     key={id}
-        //                     lat={location.latitude}
-        //                     lng={location.longitude}
-        //                     text={`${location.city}, ${location.state}`}
-        //                 />
-        //             )
-        //         })}
-        //     </GoogleMapReact>
-        // </div>
     )
 }
