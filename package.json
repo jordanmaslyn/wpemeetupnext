@@ -1,5 +1,5 @@
 {
-  "name": "next-headless-getting-started",
+  "name": "wpe-meetup",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "next lint",
     "format": "prettier src --write",
     "generate": "gqless generate",
-    "wpe-build": "next build",
+    "wpe-build": "npx graphcdn push schema && next build",
     "copy-theme": "cp -r nude-child ~/Local\\ Sites/wpemeetup/app/public/wp-content/themes/"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "dotenv": "^10.0.0",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
+    "graphcdn": "^1.0.10",
     "postcss": "^8.3.5",
     "rimraf": "^3.0.2",
     "tailwindcss": "^2.2.4",

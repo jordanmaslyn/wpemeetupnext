@@ -1,0 +1,11 @@
+name: wpe-meetup
+originUrl: 'https://remotemeetup.wpengine.com/graphql'
+scopes:
+  AUTHENTICATED: 'cookie:wpe-auth|header:Authorization'
+rules:
+  - description: Cache everything (default)
+    maxAge: 900
+    scope: AUTHENTICATED
+    swr: 900
+    types:
+      RootQuery: true
