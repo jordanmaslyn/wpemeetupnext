@@ -8,27 +8,23 @@ const loader = new Loader({
 });
 
 export function useGoogleMap(ref: MutableRefObject<HTMLElement>) {
-  const [map, setMap] = useState(null);
-  const [google, setGoogle] = useState(null);
+  const [state, setState] = useState({ map: null, google: null });
 
   if (ref == null || typeof window === "undefined") {
-    return { map, google };
+    return state;
   }
 
   useEffect(() => {
     loader.load().then((googleSrc) => {
-      setGoogle(googleSrc);
-      setMap(
-        new googleSrc.maps.Map(ref.current, {
+      setState({
+        google: googleSrc,
+        map: new googleSrc.maps.Map(ref.current, {
           center: { lat: -34.397, lng: 150.644 },
           zoom: 8,
         })
-      );
+      });
     });
   }, [ref]);
 
-  return {
-    google,
-    map,
-  };
+  return state;
 }
