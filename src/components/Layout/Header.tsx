@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { client } from "client";
 
-export default function Header() {
-  const { useQuery } = client;
-
-  const name = useQuery().viewer.name;
+export default function Header({ viewer }) {
+  const name = viewer.name;
 
   return (
     <>

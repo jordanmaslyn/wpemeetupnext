@@ -10,11 +10,11 @@ const loader = new Loader({
 export function useGoogleMap(ref: MutableRefObject<HTMLElement>) {
   const [state, setState] = useState({ map: null, google: null });
 
-  if (ref == null || typeof window === "undefined") {
-    return state;
-  }
-
   useEffect(() => {
+    if (ref.current == null || typeof window === "undefined") {
+      return;
+    }
+
     loader.load().then((googleSrc) => {
       setState({
         google: googleSrc,
