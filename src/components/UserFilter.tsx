@@ -23,43 +23,46 @@ export function UserFilter({
   const [location, setLocation] = useState(null);
   const originRef = useRef(null);
 
-  const filterUsers = useCallback(({
-    filteredLocation,
-    filteredDistance,
-  }): User[] => {
-    const filtered = allUsers.filter((user) => {
-      const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(
-        new google.maps.LatLng(filteredLocation),
-        new google.maps.LatLng({
-          lat: user.meetupInfo.location.latitude,
-          lng: user.meetupInfo.location.longitude,
-        })
-      );
-      const distanceInMiles = distanceInMeters * 0.000621371;
-      return distanceInMiles <= filteredDistance;
-    });
-    setFilteredUsers(filtered);
-    return filtered;
-  }, [allUsers, google?.maps.geometry.spherical, google?.maps.LatLng]);
+  const filterUsers = useCallback(
+    ({ filteredLocation, filteredDistance }): User[] => {
+      const filtered = allUsers.filter((user) => {
+        const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(
+          new google.maps.LatLng(filteredLocation),
+          new google.maps.LatLng({
+            lat: user.meetupInfo.location.latitude,
+            lng: user.meetupInfo.location.longitude,
+          })
+        );
+        const distanceInMiles = distanceInMeters * 0.000621371;
+        return distanceInMiles <= filteredDistance;
+      });
+      setFilteredUsers(filtered);
+      return filtered;
+    },
+    [allUsers, google?.maps.geometry.spherical, google?.maps.LatLng]
+  );
 
   useEffect(() => {
     if (originRef.current == null || !filtering) return;
 
     const options = {
-        fields: ["address_components", "geometry", "icon", "name"],
-        strictBounds: false,
-        types: ["(cities)"],
-      };
+      fields: ["address_components", "geometry", "icon", "name"],
+      strictBounds: false,
+      types: ["(cities)"],
+    };
 
-      const updateLocation = (autocomplete) => () => {
-        const place = autocomplete.getPlace();
-    
-        if (place.geometry?.location == null) return;
-    
-        const newLocation = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
-        setLocation(newLocation);
-        handleOnChange(filterUsers({ filteredLocation: newLocation, filteredDistance: distance }));
+    const updateLocation = (autocomplete) => () => {
+      const place = autocomplete.getPlace();
+
+      if (place.geometry?.location == null) return;
+
+      const newLocation = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
       };
+      setLocation(newLocation);
+      handleOnChange(filterUsers({ filteredLocation: newLocation, filteredDistance: distance }));
+    };
 
     const autocomplete = new google.maps.places.Autocomplete(originRef.current, options);
     autocomplete.bindTo("bounds", map);

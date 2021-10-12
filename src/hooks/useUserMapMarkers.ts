@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLocationString } from "../utilities/strings";
-import MarkerClusterer from '@googlemaps/markerclustererplus';
+import MarkerClusterer from "@googlemaps/markerclustererplus";
 
 export function useUserMapMarkers({ map, google, users, allUsers }) {
   const [markers, setMarkers] = useState([]);
@@ -44,7 +44,6 @@ export function useUserMapMarkers({ map, google, users, allUsers }) {
     map.fitBounds(bounds);
     map.panToBounds(bounds);
 
-    const markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: `/images/m`});
+    const markerCluster = new MarkerClusterer(map, markers, { imagePath: `/images/m` });
   }, [map, google, users.length, allUsers.length, MarkerClusterer]);
 }

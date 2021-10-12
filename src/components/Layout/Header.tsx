@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Header({ viewer }) {
   const name = viewer.name;
@@ -12,7 +12,7 @@ export default function Header({ viewer }) {
             <a className="flex">
               <span className="sr-only">WP Engine Meetup</span>
               <div className="h-8 w-auto sm:h-10">
-                <Image src={require('/public/images/wpe-logo.svg')} alt="" />
+                <Image src={require("/public/images/wpe-logo.svg")} alt="" />
               </div>
               <h1 className="font-extrabold px-4 text-4xl">Meetup</h1>
             </a>

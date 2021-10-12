@@ -3,14 +3,14 @@ import { UsersMap } from "components/maps/UsersMap";
 import Layout from "components/Layout";
 import Head from "next/head";
 import { client, RootQueryToUserConnectionEdge } from "client";
-import { Suspense as ReactSuspense, SuspenseProps } from 'react';
+import { Suspense as ReactSuspense, SuspenseProps } from "react";
 
 export const Suspense =
-  typeof window !== 'undefined'
+  typeof window !== "undefined"
     ? ReactSuspense
     : function SuspenseSSR({ children }: SuspenseProps) {
-      return <>{children}</>;
-    };
+        return <>{children}</>;
+      };
 
 const Page = client.graphql(
   function Page() {
@@ -18,7 +18,10 @@ const Page = client.graphql(
     const isNotExcluded = ({ node }: RootQueryToUserConnectionEdge) => !node.meetupInfo.exclude;
     const hasLocation = ({ node }: RootQueryToUserConnectionEdge) =>
       node.meetupInfo?.location != null;
-    const displayedUsers = client.client.query.users({ first: 100 }).edges.filter(isNotExcluded).filter(hasLocation);
+    const displayedUsers = client.client.query
+      .users({ first: 100 })
+      .edges.filter(isNotExcluded)
+      .filter(hasLocation);
     const populatedUsers = displayedUsers
       .filter(
         ({
@@ -27,7 +30,12 @@ const Page = client.graphql(
             firstName,
             lastName,
             name,
-            meetupInfo: { location: { longitude, latitude, city, state, country, countryShort }, exclude, phoneNumber, email },
+            meetupInfo: {
+              location: { longitude, latitude, city, state, country, countryShort },
+              exclude,
+              phoneNumber,
+              email,
+            },
           },
         }) => !!latitude && !!longitude
       )
@@ -49,7 +57,7 @@ const Page = client.graphql(
     suspense: true,
 
     // ((error: GQlessError) => void) | undefined
-    onError(error) { },
+    onError(error) {},
 
     // boolean | undefined
     staleWhileRevalidate: true,

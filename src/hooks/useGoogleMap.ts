@@ -21,7 +21,7 @@ export function useGoogleMap(ref: MutableRefObject<HTMLElement>) {
         map: new googleSrc.maps.Map(ref.current, {
           center: { lat: -34.397, lng: 150.644 },
           zoom: 8,
-        })
+        }),
       });
     });
   }, [ref]);
