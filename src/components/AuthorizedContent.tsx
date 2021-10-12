@@ -1,6 +1,7 @@
-import { useAuth } from "hooks/useAuth";
+import { client } from 'client';
 
 export function AuthorizedContent({ children }) {
-  const authToken = useAuth();
-  return authToken ? children : <p>You must be authorized to view this content.</p>;
+  const { useAuth } = client.auth;
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <p>You must be authorized to view this content.</p>;
 }

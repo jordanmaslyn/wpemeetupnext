@@ -9,13 +9,13 @@
     "clean": "rimraf .next node_modules",
     "lint": "next lint",
     "format": "prettier src --write",
-    "generate": "gqless generate",
+    "generate": "gqty generate",
     "wpe-build": "next build",
     "copy-theme": "cp -r nude-child ~/Local\\ Sites/wpemeetup/app/public/wp-content/themes/"
   },
   "dependencies": {
-    "@faustjs/core": "^0.7.1",
-    "@faustjs/next": "^0.7.1",
+    "@faustjs/core": "^0.12.3",
+    "@faustjs/next": "^0.12.3",
     "@googlemaps/js-api-loader": "^1.12.1",
     "@googlemaps/markerclustererplus": "^1.2.0",
     "@headlessui/react": "^1.3.0",
@@ -26,11 +26,12 @@
     "sass": "^1.35.1"
   },
   "devDependencies": {
-    "@gqless/cli": "^2.0.16",
+    "@gqty/cli": "^2.0.16",
     "@types/google.maps": "^3.45.6",
     "@types/react": "^17.0.11",
     "autoprefixer": "^10.3.1",
     "dotenv": "^10.0.0",
+    "dotenv-flow": "^3.2.0",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
     "postcss": "^8.3.5",

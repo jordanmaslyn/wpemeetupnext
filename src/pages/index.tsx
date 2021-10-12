@@ -14,11 +14,12 @@ export const Suspense =
 
 const Page = client.graphql(
   function Page() {
-    const { id: viewerId, name: viewerName } = client.client.query.viewer;
+    const { useQuery } = client.auth;
+    const { id: viewerId, name: viewerName } = useQuery().viewer
     const isNotExcluded = ({ node }: RootQueryToUserConnectionEdge) => !node.meetupInfo.exclude;
     const hasLocation = ({ node }: RootQueryToUserConnectionEdge) =>
       node.meetupInfo?.location != null;
-    const displayedUsers = client.client.query
+    const displayedUsers = useQuery()
       .users({ first: 100 })
       .edges.filter(isNotExcluded)
       .filter(hasLocation);
