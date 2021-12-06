@@ -14,8 +14,8 @@
     "copy-theme": "cp -r nude-child ~/Local\\ Sites/wpemeetup/app/public/wp-content/themes/"
   },
   "dependencies": {
-    "@faustjs/core": "^0.13.1",
-    "@faustjs/next": "^0.13.1",
+    "@faustjs/core": "^0.14.1",
+    "@faustjs/next": "^0.14.0",
     "@googlemaps/js-api-loader": "^1.12.1",
     "@googlemaps/markerclustererplus": "^1.2.0",
     "@headlessui/react": "^1.3.0",
